@@ -1,2 +1,3 @@
-# natours-express-api
-This repository contains node js and Express api.
+# natours-app-node-express
+
+This repository contains the Natours Backend Api which is created using Node js and Express by following jonas schmedtmann Node Js Course.
