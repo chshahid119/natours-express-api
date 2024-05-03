@@ -15,29 +15,29 @@ const getAllTours = (req, res) => {
     status: 'success',
     results: tours.length,
     data: {
-      tours,
-    },
+      tours
+    }
   });
 };
 
 const getTour = (req, res) => {
   console.log(req.params);
   const id = req.params.id * 1; // to convert string to number
-  const tour = tours.find((el) => el.id === id);
+  const tour = tours.find(el => el.id === id);
 
   // if (id > tours.length) {
   if (!tour) {
     return res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID',
+      message: 'Invalid ID'
     });
   }
 
   res.status(200).json({
     status: 'success',
     data: {
-      tour,
-    },
+      tour
+    }
   });
 };
 
@@ -51,12 +51,12 @@ const createTour = (req, res) => {
   fs.writeFile(
     `${__dirname}/dev-data/data/tours-simple.json`,
     JSON.stringify(tours),
-    (err) => {
+    err => {
       res.status(201).json({
         status: 'succcess',
         data: {
-          tour: newTour,
-        },
+          tour: newTour
+        }
       });
     }
   );
@@ -67,7 +67,7 @@ const updateTour = (req, res) => {
     {
       return res.status(404).json({
         status: 'fail',
-        message: 'Invalid ID',
+        message: 'Invalid ID'
       });
     }
   }
@@ -81,7 +81,7 @@ const deleteTour = (req, res) => {
     {
       return res.status(404).json({
         status: 'fail',
-        message: 'Invalid ID',
+        message: 'Invalid ID'
       });
     }
   }
@@ -94,7 +94,10 @@ const deleteTour = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
-app.route('/api/v1/tours').get(getAllTours).post(createTour);
+app
+  .route('/api/v1/tours')
+  .get(getAllTours)
+  .post(createTour);
 
 app
   .route('/api/v1/tours/:id')
