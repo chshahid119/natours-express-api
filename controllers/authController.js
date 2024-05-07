@@ -17,7 +17,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    passwordChangedAt: req.body.passwordChangedAt
+    passwordChangedAt: req.body.passwordChangedAt,
+    role: req.body.role
   });
 
   const token = signToken(newUser._id);
@@ -46,11 +47,13 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  const tokken = signToken(user._id);
+  const token = signToken(user._id);
   res.status(200).json({
     status: 'success',
-    tokken
+    token
   });
+
+  // next();
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -96,3 +99,15 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    // roles ['admin','lead-guide']. role='user'
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have persmission to perform this action', 403)
+      );
+    }
+    next();
+  };
+};
