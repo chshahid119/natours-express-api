@@ -30,6 +30,12 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 
 exports.getTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
+  /*Jab sirf getTour par Populate use krna ho lekin ab query
+   middleware bana dia hai jo sab par kam kary ga (isliye comment kar dia)*/
+  // const tour = await Tour.findById(req.params.id).populate({
+  //   path: 'guides',
+  //   select: '-__v -passwordChangedAt'
+  // });
   // Tour.findOne({ _id: req.params.id })
 
   if (!tour) {
