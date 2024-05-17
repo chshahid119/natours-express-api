@@ -12,18 +12,10 @@ const filterObj = (obj, ...allowdFields) => {
   return newObj;
 };
 
-// exports.getAllUsers = catchAsync(async (req, res) => {
-//   const users = await User.find();
-
-//   // SEND RESPONSE
-//   res.status(200).json({
-//     status: 'success',
-//     results: users.length,
-//     data: {
-//       users
-//     }
-//   });
-// });
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Create error if user POSTs password data
