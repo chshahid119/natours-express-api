@@ -111,6 +111,11 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+// Indexes: to improving Read perfomance of Querying
+// tourSchema.index({ price: 1 });
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
 });
