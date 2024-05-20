@@ -5,6 +5,7 @@ const authController = require('./../controllers/authController');
 /*mergeParams use krty hain ta ky child apnay parent ki :tourId ko access kar saky jo
  ky by default mergeParams: false hoti hai*/
 const router = express.Router({ mergeParams: true });
+
 router.use(authController.protect);
 
 router
