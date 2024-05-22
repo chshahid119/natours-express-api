@@ -27,11 +27,6 @@ exports.getTour = catchAsync(async (req, res) => {
     fields: 'review rating user'
   });
 
-  tour.formattedDate = new Date(tour.startDates[0]).toLocaleString('en-us', {
-    month: 'long',
-    year: 'numeric'
-  });
-
   // 2) Build template
   // 3) Render Template using data from 1)
   res.status(200).render('tour', {
