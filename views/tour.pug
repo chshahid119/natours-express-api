@@ -1,7 +1,9 @@
 extends base
 
 block append head
-    //- script(src='/js/mapbox.js')
+    script(src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet')
+
 
 mixin overviewBox(label,text,icon)
     .overview-box__detail
@@ -86,7 +88,9 @@ block content
         
 
     section.section-map
-        #map(data-locations=`${JSON.stringify(tour.locations)}`)
+        //- Commented it because of error in mapbox implementations 
+        //- #map(data-locations=`${JSON.stringify(tour.locations)}`)
+        img#map.header__hero-img(src='/img/tours/map.png', alt='Map Image')
 
     section.section-reviews
         .reviews
